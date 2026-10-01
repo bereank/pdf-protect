@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#f4f1ea">
         <title>Paperlock | PDF protection API</title>
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif
+        <link rel="stylesheet" href="{{ asset('paperlock.css') }}">
     </head>
     <body>
         <div class="site-shell">
@@ -63,10 +61,12 @@
                         <h2 id="upload-title">Drop a PDF.<br><em>Get peace of mind.</em></h2>
                     </div>
                     <div class="upload-panel" id="drop-zone">
-                        <input id="pdf-input" type="file" accept="application/pdf,.pdf" hidden>
-                        <div class="upload-icon" aria-hidden="true">↑</div>
-                        <p class="upload-title">Drop your PDF here</p>
-                        <p class="upload-subtitle">or <button type="button" id="browse-button">browse your files</button></p>
+                        <label class="upload-control" for="pdf-input">
+                            <span class="upload-icon" aria-hidden="true">↑</span>
+                            <span class="upload-title">Drop your PDF here</span>
+                            <span class="upload-subtitle">or <span class="browse-link">browse your files</span></span>
+                        </label>
+                        <input id="pdf-input" type="file" accept="application/pdf,.pdf">
                         <p class="upload-note">PDF only <span>·</span> up to 25 MB</p>
                         <p class="upload-result" id="upload-result" aria-live="polite"></p>
                     </div>
