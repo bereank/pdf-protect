@@ -13,6 +13,32 @@ class PdfProtectionController extends Controller
 {
     public function protect(Request $request)
     {
+
+        Log::info('PDF upload debug', [
+            'content_type' => $request->header('Content-Type'),
+            'content_length' => $request->header('Content-Length'),
+
+            'has_file' => $request->hasFile('file'),
+
+            'file' => $request->file('file')
+                ? [
+                    'valid' => $request->file('file')->isValid(),
+                    'error' => $request->file('file')->getError(),
+                    'error_message' => $request->file('file')->getErrorMessage(),
+                    'size' => $request->file('file')->getSize(),
+                    'name' => $request->file('file')->getClientOriginalName(),
+                    'mime' => $request->file('file')->getMimeType(),
+                ]
+                : null,
+
+            'php_limits' => [
+                'upload_max_filesize' => ini_get('upload_max_filesize'),
+                'post_max_size' => ini_get('post_max_size'),
+                'upload_tmp_dir' => ini_get('upload_tmp_dir'),
+            ],
+        ]);
+
+
         $request->validate([
             'file' => [
                 'required',
