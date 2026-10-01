@@ -42,8 +42,7 @@ class PdfProtectionController extends Controller
         'system_tmp' => sys_get_temp_dir(),
     ]);
 
-    dd('stop');
-    
+  
 
 
         $request->validate([
